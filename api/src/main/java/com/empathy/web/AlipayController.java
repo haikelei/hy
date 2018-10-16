@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import static com.empathy.service.impl.UserinfoService.API_SECRET;
-import static jdk.nashorn.internal.codegen.ObjectClassGenerator.LOG;
 
 /**
  * Created by MI on 2018/2/28.
@@ -162,16 +161,16 @@ public class AlipayController {
                             baseMemberService.addMoney(money,baseDeal.getUserId());
                         }
                 } else {
-                    LOG.info("订单支付通知：签名错误");
+//                    LOG.info("订单支付通知：签名错误");
                    /* return error(CommonErrorResult.SECRET_FAIL, "订单支付通知：签名错误");*/
                 }
             } else {
-                LOG.info(  "订单支付通知：支付失败，" + restmap.get("err_code") + ":" + restmap.get("err_code_des"));
+//                LOG.info(  "订单支付通知：支付失败，" + restmap.get("err_code") + ":" + restmap.get("err_code_des"));
                /* throw new BusinessException(CommonErrorResult.SECRET_FAIL,
                         "订单支付通知：支付失败，" + restmap.get("err_code") + ":" + restmap.get("err_code_des"));*/
             }
         } catch (Exception e) {
-            LOG.info("获取回调失败");
+//            LOG.info("获取回调失败");
             /*throw new BusinessException(CommonErrorResult.SECRET_FAIL,"获取回调失败");*/
         }
     }
