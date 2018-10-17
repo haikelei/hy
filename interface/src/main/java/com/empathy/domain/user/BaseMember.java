@@ -62,4 +62,40 @@ public class BaseMember extends BaseDomain {
 
     private String fileAccid;
     private String fileToken;
+    private Integer experience;
+
+    @Override
+    public String toString() {
+        return "BaseMember{" +
+                "username='" + username + '\'' +
+                ", sex=" + sex +
+                ", level=" + level +
+                ", phone='" + phone + '\'' +
+                ", token='" + token + '\'' +
+                ", intro='" + intro + '\'' +
+                ", address='" + address + '\'' +
+                ", login_status=" + login_status +
+                ", proveStatus=" + proveStatus +
+                ", memberStatus=" + memberStatus +
+                ", url='" + url + '\'' +
+                ", lastDate=" + lastDate +
+                ", passwordStatus=" + passwordStatus +
+                ", proveLevel=" + proveLevel +
+                ", endTime=" + endTime +
+                ", pushUrl='" + pushUrl + '\'' +
+                ", roomId='" + roomId + '\'' +
+                ", rtmpPullUrl='" + rtmpPullUrl + '\'' +
+                ", liveStatus=" + liveStatus +
+                ", liveId=" + liveId +
+                ", RoomManageStatus=" + RoomManageStatus +
+                ", RoomBlackStatus=" + RoomBlackStatus +
+                ", giftMoney=" + giftMoney +
+                ", rank=" + rank +
+                ", accid='" + accid + '\'' +
+                ", focusStatus=" + focusStatus +
+                ", fileAccid='" + fileAccid + '\'' +
+                ", fileToken='" + fileToken + '\'' +
+                ", experience=" + experience +
+                '}';
+    }
 }

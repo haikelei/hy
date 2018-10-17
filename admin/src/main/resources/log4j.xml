@@ -23,7 +23,7 @@
     </appender>
 
     <logger name="org.springframework" additivity="false">
-        <level value="ERROR"/>
+        <level value="INFO"/>
         <appender-ref ref="filelog"/>
     </logger>
     <root>

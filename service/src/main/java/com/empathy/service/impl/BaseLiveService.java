@@ -742,6 +742,8 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
             BaseMember baseMember = baseMemberDao.findById(hostProve.getUserId());
             baseMember.setProveStatus(1);
             baseMember.setLastRevampTime(System.currentTimeMillis());
+            baseMember.setExperience(0);
+            System.out.println(baseMember.toString());
             baseMemberDao.update(baseMember);
             BaseLive baseLive = new BaseLive();
             baseLive.setUserId(baseMember.getId());

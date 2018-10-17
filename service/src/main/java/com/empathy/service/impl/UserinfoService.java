@@ -783,6 +783,7 @@ public class UserinfoService extends AbstractBaseService implements IUserinfoSer
         BaseMember baseMember = new BaseMember();
         baseMember.setPhone(bo.getPhone());
         baseMember.setSex(1);
+        baseMember.setExperience(0);
         baseMember.setUsername(new NameUtils().getName());
         baseMember.setProveStatus(0);
         baseMember.setMemberStatus(0);

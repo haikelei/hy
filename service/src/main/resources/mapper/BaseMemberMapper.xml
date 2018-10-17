@@ -14,6 +14,7 @@
         level,
         member_status memberStatus,
         address,
+        experience,
         create_time createTime,
         last_revamp_time lastRevampTime
     </sql>
@@ -37,7 +38,7 @@
 
     <update id="update" parameterType="com.empathy.domain.user.BaseMember">
         UPDATE base_member SET username = #{username},token = #{token}, level = #{level}, prove_status = #{proveStatus}, member_status =
-        #{memberStatus}, address = #{address},sex =
+        #{memberStatus}, address = #{address},experience = #{experience},sex =
         #{sex},phone=#{phone},intro=#{intro},last_revamp_time=#{lastRevampTime} ,del_flag=#{delFlag} WHERE id = #{id}
     </update>
 
