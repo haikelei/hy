@@ -11,13 +11,11 @@ import com.empathy.dao.*;
 import com.empathy.domain.bidding.File;
 import com.empathy.domain.deal.BaseDeal;
 import com.empathy.domain.enumer.LoginType;
-import com.empathy.domain.file.FileTypeAndPath;
 import com.empathy.domain.file.bo.FileCarBo;
 import com.empathy.domain.user.bo.*;
 import com.empathy.pay.alipay.AlipayUtils;
 import com.empathy.pay.alipay.RefundContent;
 import com.empathy.service.AbstractBaseService;
-import com.empathy.service.IMemberService;
 import com.empathy.service.IUserinfoService;
 import com.empathy.utils.*;
 import com.empathy.utils.wx.WXPayConstants;
@@ -25,7 +23,7 @@ import com.empathy.utils.wx.WXPayUtil;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.apache.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,7 +91,6 @@ public class UserinfoService extends AbstractBaseService implements IUserinfoSer
 
         List<PrivateChat> list = privateChatDao.list(chat);
         int count = privateChatDao.count(chat.getUserId());
-
         return success(count,list);
     }
 
@@ -791,6 +788,7 @@ public class UserinfoService extends AbstractBaseService implements IUserinfoSer
         baseMemberDao.save(baseMember);
         String yxToken = YXUtils.getYxToken(baseMember.getId(), baseMember.getUsername());
         baseMember.setToken(yxToken);
+        baseMember.setExperience(0);
         baseMemberDao.update(baseMember);
         Userinfo userinfo = new Userinfo();
         userinfo.setLastRevampTime(System.currentTimeMillis());

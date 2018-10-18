@@ -7,6 +7,7 @@ import com.empathy.domain.user.bo.*;
 import com.empathy.service.IUserinfoService;
 import com.empathy.utils.SMSUtils;
 import io.swagger.annotations.*;
+import org.apache.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -95,7 +96,6 @@ public class UserController {
     @ApiOperation(value = "注册", httpMethod = "POST", response = String.class)
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
     public RspResult regist(RegistBo bo) {
-
         return userinfoService.regist(bo);
 
     }

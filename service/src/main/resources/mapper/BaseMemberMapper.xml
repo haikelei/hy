@@ -31,9 +31,9 @@
 
     <insert id="save" parameterType="com.empathy.domain.user.BaseMember" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO base_member
-        (username,sex,token,prove_status,member_status,phone,intro,level,create_time,last_revamp_time,address,del_flag)
+        (username,sex,token,prove_status,member_status,phone,experience,intro,level,create_time,last_revamp_time,address,del_flag)
         VALUES
-        (#{username},#{sex},#{token},#{proveStatus},#{memberStatus},#{phone},#{intro},#{level},#{createTime},#{lastRevampTime},#{address},#{delFlag})
+        (#{username},#{sex},#{token},#{proveStatus},#{memberStatus},#{phone},#{experience},#{intro},#{level},#{createTime},#{lastRevampTime},#{address},#{delFlag})
     </insert>
 
     <update id="update" parameterType="com.empathy.domain.user.BaseMember">
