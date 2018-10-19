@@ -6,12 +6,12 @@ $(function () {
             {label: 'ID', name: 'id', index: 'id', width: 50, key: true},
             {
                 label: '根节点', name: 'rootId', index: 'root_id', width: 80, formatter: function (value, options, row) {
-                return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看用户\',\'' + nginxURL + 'modules/app/user.html?username=' + row['rootName'] + '\')" title="点击查看">' + row['rootName'] + '</a>';
+                return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看用户\',te' + nginxURL + 'mp.html' + rtemp.htmlame'] + ')" title="点击查看">' + row['rootName'] + '</a>';
             }
             },
             {
                 label: '节点', name: 'nodeId', index: 'node_id', width: 80, formatter: function (value, options, row) {
-                return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看用户\',\'' + nginxURL + 'modules/app/user.html?username=' + row['nodeName'] + '\')" title="点击查看">' + row['nodeName'] + '</a>';
+                return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看用户\',te' + nginxURL + 'mp.html' + row['nodeName'] + ')" titletemp.html + row['nodeName'] + '</a>';
             }
             },
             {label: '分支深度', name: 'depth', index: 'depth', width: 80},

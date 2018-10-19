@@ -33,7 +33,7 @@ $(function () {
                 index: 'recommend_id',
                 width: 120,
                 formatter: function (value, options, row) {
-                    return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看推荐人\',\'' + nginxURL + 'modules/app/user.html?username=' + row['recommendUsername'] + '\')" title="点击查看">' + row['recommendUsername'] + '</a>';
+                    return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看推荐人\',te' + nginxURL + 'mp.html' + row['recommendUsername'] + ')" title="点击查看">' + row['recommendUsername'] + '</a>';
                 }
             },
             {label: '可提现佣金', name: 'commissionEnable', index: 'commission_enable', width: 100},

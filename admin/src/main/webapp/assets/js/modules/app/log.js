@@ -6,7 +6,7 @@ $(function () {
             {label: 'ID', name: 'id', index: 'id', width: 150, key: true},
             {
                 label: '动作用户', name: 'userId', index: 'user_id', width: 120, formatter: function (value, options, row) {
-                return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看用户\',\'' + nginxURL + 'modules/app/user.html?username=' + row['username'] + '\')" title="点击查看">' + row['username'] + '</a>';
+                return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看用户\',te' + nginxURL + 'mp.html' + row['username'] + ')" title="点击查看">' + row['username'] + '</a>';
             }
             },
             {label: '动作描述', name: 'operation', index: 'operation', width: 250},

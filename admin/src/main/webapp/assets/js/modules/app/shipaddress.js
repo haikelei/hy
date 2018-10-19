@@ -7,7 +7,7 @@ $(function () {
             {label: 'ID', name: 'id', index: 'id', width: 30, key: true},
             {
                 label: '所属用户', name: 'userId', index: 'user_id', width: 80, formatter: function (value, options, row) {
-                return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看收货地址所属用户\',\'' + nginxURL + 'modules/app/user.html?username=' + row['userName'] + '\')" title="点击查看">' + row['userName'] + '</a>';
+                return value === 0 ? "无" : '<a class="btn btn-default btn-xs" href="javascript:void(0)" onclick="frame(\'查看收货地址所属用户\',te' + nginxURL + 'mp.html' + row['userName'] + ')" title="点击查看">' + row['userName'] + '</a>';
             }
             },
             {label: '收件人', name: 'consignee', index: 'consignee', width: 80},
