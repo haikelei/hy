@@ -12,7 +12,6 @@ import lombok.Setter;
 @Setter
 public class AlbumFindByIdBo {
 
-
     @ApiModelProperty("专辑id")
     @Required
     private Long id;

@@ -87,6 +87,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="com.empathy.domain"/>
         <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+        <property name="configLocation" value="classpath:mapper/mybatis-config.xml"></property>
     </bean>
 
     <!-- xml文件需要在同级目录下面，dao -->

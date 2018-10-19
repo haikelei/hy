@@ -432,7 +432,8 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
         if(bo.getType()==0){
         //搜索专辑列表
             FindAlbumForAccountBo bo1  = new FindAlbumForAccountBo();
-            bo1.setStr(bo1.getStr());
+            String str = bo.getStr();
+            bo1.setStr(str);
             bo1.setLimit(bo.getLimit());
             bo1.setStart(bo.getStart());
             List<AlbumAccountVo> albumForAccount = albumDao.findAlbumForAccount(bo1);

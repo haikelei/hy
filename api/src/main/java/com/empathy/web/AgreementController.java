@@ -14,6 +14,8 @@ import com.empathy.service.IAccountService;
 import com.empathy.service.IAgreementService;
 import com.empathy.service.IBaseMemberService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -96,6 +98,7 @@ public class AgreementController {
      * @return
      */
     @RequestMapping(value = "/findAgreementByType", method = RequestMethod.GET)
+    @ApiOperation("查询协议,根据type区分:1提现说明 2分享协议 3积分规则 4会员购买协议 5支付协议")
     @ResponseBody
     public RspResult findAgreementByType(AgreementFindByTypeBo bo) {
 
