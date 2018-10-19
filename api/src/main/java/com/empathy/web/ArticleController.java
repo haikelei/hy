@@ -55,7 +55,14 @@ public class ArticleController {
 
 
         return articleService.addPoint(id,userId);
+    }
 
+    @ApiOperation(value = "取消点赞", httpMethod = "POST", response = String.class)
+    @RequestMapping(value = "/cancelPoint", method = RequestMethod.POST)
+    public RspResult cancelPoint(Long id,Long userId) {
+
+
+        return articleService.canclPoint(id,userId);
     }
 
     @ApiOperation(value = "查看点赞列表", httpMethod = "POST", response = String.class)

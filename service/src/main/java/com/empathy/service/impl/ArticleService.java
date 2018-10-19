@@ -81,6 +81,18 @@ public class ArticleService extends AbstractBaseService implements IArticleServi
     }
 
     @Override
+    public RspResult canclPoint(Long id,Long userId) {
+        try {
+
+            articleDao.decPoint(id);
+            articleDao.delPointInfo(id,userId);
+            return success();
+        }catch (Exception e){
+            return errorNo();
+        }
+    }
+
+    @Override
     public RspResult findPoint(PointFindBo bo) {
         try {
 

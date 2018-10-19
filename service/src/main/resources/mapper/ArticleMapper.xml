@@ -28,6 +28,11 @@
         VALUES (#{userId},#{id},#{createTime})
     </insert>
 
+    <delete id="delPointInfo">
+
+        DELETE FROM base_point_info where user_id = #{userId} and article_id = #{id}
+    </delete>
+
     <select id="findCount" resultType="int">
 
         select count(id) from base_point_info where user_id = #{userId} and article_id = #{id}
@@ -126,6 +131,11 @@
     <update id="addPoint" parameterType="long">
 
           UPDATE base_article SET red_point = red_point+1 where id=#{id}
+    </update>
+
+    <update id="decPoint" parameterType="long">
+
+          UPDATE base_article SET red_point = red_point-1 where id=#{id}
     </update>
 
     <select id="countPoint" resultType="int"

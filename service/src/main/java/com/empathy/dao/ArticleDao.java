@@ -27,9 +27,11 @@ public interface ArticleDao extends BaseDao<Article, Long, LogBo> {
 
     void addPoint(Long id);
 
-    void addPointInfo(@Param(value = "id") Long id,
-                      @Param(value = "userId") Long userId,
-                      @Param(value = "createTime") Long createTime);
+    void decPoint(Long id);
+
+    void addPointInfo(@Param(value = "id") Long id, @Param(value = "userId") Long userId, @Param(value = "createTime") Long createTime);
+
+    void delPointInfo(@Param(value = "id") Long id,@Param(value = "userId") Long userId);
 
     int findCount(@Param(value = "id") Long id,@Param(value = "userId") Long userId);
 
