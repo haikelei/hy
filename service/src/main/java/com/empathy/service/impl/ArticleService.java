@@ -2,27 +2,24 @@ package com.empathy.service.impl;
 
 import com.empathy.common.RspResult;
 import com.empathy.dao.*;
-import com.empathy.domain.agreement.Agreement;
-import com.empathy.domain.agreement.bo.*;
 import com.empathy.domain.article.Article;
 import com.empathy.domain.article.bo.ArticleAddBo;
 import com.empathy.domain.article.bo.ArticleFindBo;
 import com.empathy.domain.article.bo.ArticleUpdBo;
+import com.empathy.domain.article.bo.PointFindBo;
 import com.empathy.domain.article.vo.ArticleVo;
+import com.empathy.domain.article.vo.PointFindVo;
 import com.empathy.domain.baseRecording.BaseRecording;
 import com.empathy.domain.bidding.File;
 import com.empathy.domain.file.bo.FileCarBo;
 import com.empathy.domain.user.BaseMember;
 import com.empathy.service.AbstractBaseService;
-import com.empathy.service.IAgreementService;
 import com.empathy.service.IArticleService;
 import com.empathy.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 /**
@@ -76,9 +73,35 @@ public class ArticleService extends AbstractBaseService implements IArticleServi
         try {
 
             articleDao.addPoint(id);
-            articleDao.addPointInfo(id,userId);
+            articleDao.addPointInfo(id,userId, System.currentTimeMillis());
             return success();
         }catch (Exception e){
+            return errorNo();
+        }
+    }
+
+    @Override
+    public RspResult canclPoint(Long id,Long userId) {
+        try {
+
+            articleDao.decPoint(id);
+            articleDao.delPointInfo(id,userId);
+            return success();
+        }catch (Exception e){
+            return errorNo();
+        }
+    }
+
+    @Override
+    public RspResult findPoint(PointFindBo bo) {
+        try {
+
+            List<PointFindVo> list = articleDao.findPoint(bo);
+            Integer count = articleDao.countPoint(bo);
+
+            return success(count != null ? count : 0,list);
+        }catch (Exception e){
+            e.printStackTrace();
             return errorNo();
         }
     }

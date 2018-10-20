@@ -4,16 +4,14 @@ import com.empathy.common.RspResult;
 import com.empathy.domain.article.bo.ArticleAddBo;
 import com.empathy.domain.article.bo.ArticleFindBo;
 import com.empathy.domain.article.bo.ArticleUpdBo;
-import com.empathy.domain.baseMessage.bo.MessageAddBo;
+import com.empathy.domain.article.bo.PointFindBo;
 import com.empathy.service.IArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by MI on 2018/6/7.
@@ -57,7 +55,22 @@ public class ArticleController {
 
 
         return articleService.addPoint(id,userId);
+    }
 
+    @ApiOperation(value = "取消点赞", httpMethod = "POST", response = String.class)
+    @RequestMapping(value = "/cancelPoint", method = RequestMethod.POST)
+    public RspResult cancelPoint(Long id,Long userId) {
+
+
+        return articleService.canclPoint(id,userId);
+    }
+
+    @ApiOperation(value = "查看点赞列表", httpMethod = "POST", response = String.class)
+    @RequestMapping(value = "/findPoint", method = RequestMethod.POST)
+    public RspResult findPoint(PointFindBo bo) {
+
+
+        return articleService.findPoint(bo);
     }
 
     @ApiOperation(value = "app查找", httpMethod = "POST", response = String.class)

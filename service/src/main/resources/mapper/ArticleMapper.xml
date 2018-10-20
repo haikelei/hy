@@ -24,9 +24,14 @@
     </insert>
 
     <insert id="addPointInfo" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO base_point_info (user_id,article_id)
-        VALUES (#{userId},#{id})
+        INSERT INTO base_point_info (user_id,article_id,create_time)
+        VALUES (#{userId},#{id},#{createTime})
     </insert>
+
+    <delete id="delPointInfo">
+
+        DELETE FROM base_point_info where user_id = #{userId} and article_id = #{id}
+    </delete>
 
     <select id="findCount" resultType="int">
 
@@ -128,7 +133,28 @@
           UPDATE base_article SET red_point = red_point+1 where id=#{id}
     </update>
 
+    <update id="decPoint" parameterType="long">
 
+          UPDATE base_article SET red_point = red_point-1 where id=#{id}
+    </update>
+
+    <select id="countPoint" resultType="int"
+            parameterType="com.empathy.domain.article.bo.PointFindBo">
+
+        SELECT count(a.id)
+        FROM base_point_info a
+        WHERE a.article_id = #{id} LIMIT #{start},#{limit}
+    </select>
+
+    <select id="findPoint" resultType="com.empathy.domain.article.vo.PointFindVo"
+            parameterType="com.empathy.domain.article.bo.PointFindBo">
+
+        SELECT a.id id ,a.user_id userId, a.article_id articleId, a.create_time createTime,
+                b.username pointUsername, b.level level
+        FROM base_point_info a left join base_member b on a.user_id = b.id
+        WHERE a.article_id = #{id}
+        order by a.create_time desc LIMIT #{start},#{limit}
+    </select>
 
 
 </mapper>
