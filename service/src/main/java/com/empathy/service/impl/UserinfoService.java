@@ -3,15 +3,14 @@ package com.empathy.service.impl;
 import com.alibaba.druid.util.StringUtils;
 import com.empathy.cache.CacheUtils;
 import com.empathy.common.RspResult;
-import com.empathy.domain.live.BaseLive;
-import com.empathy.domain.live.BaseLiveChannel;
-import com.empathy.domain.user.*;
-import org.apache.commons.httpclient.HttpClient;
 import com.empathy.dao.*;
 import com.empathy.domain.bidding.File;
 import com.empathy.domain.deal.BaseDeal;
 import com.empathy.domain.enumer.LoginType;
 import com.empathy.domain.file.bo.FileCarBo;
+import com.empathy.domain.live.BaseLive;
+import com.empathy.domain.live.BaseLiveChannel;
+import com.empathy.domain.user.*;
 import com.empathy.domain.user.bo.*;
 import com.empathy.pay.alipay.AlipayUtils;
 import com.empathy.pay.alipay.RefundContent;
@@ -20,10 +19,10 @@ import com.empathy.service.IUserinfoService;
 import com.empathy.utils.*;
 import com.empathy.utils.wx.WXPayConstants;
 import com.empathy.utils.wx.WXPayUtil;
+import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -768,10 +767,10 @@ public class UserinfoService extends AbstractBaseService implements IUserinfoSer
     @Override
     @Transactional(rollbackFor = Exception.class)
     public RspResult regist(RegistBo bo) {
-//        Boolean b = checkCode(bo.getCode(), bo.getPhone());
-//        if (b) {
-//            return new RspResult("验证码错误", 1);
-//        }
+        Boolean b = checkCode(bo.getCode(), bo.getPhone());
+        if (b) {
+            return new RspResult("验证码错误", 1);
+        }
         FindPhone findPhone = new FindPhone(bo.getPhone(), "phone");
         int count = userinfoDao.findCountByPhone(findPhone);
         if (count > 0) {
