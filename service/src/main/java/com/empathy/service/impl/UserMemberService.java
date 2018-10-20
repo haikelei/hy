@@ -52,7 +52,7 @@ public class UserMemberService extends AbstractBaseService implements IUserMembe
 
     //----------------------------微信账号--------------------------------
 
-    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/pay/unifiedorder"; // 统一下单
+    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/weixinpay/unifiedorder"; // 统一下单
 
     private static final String WECHAT_APP_ID ="wxc27fe76af5a55120";
 
@@ -60,7 +60,7 @@ public class UserMemberService extends AbstractBaseService implements IUserMembe
     //商户平台密钥
     public static final String API_SECRET = "WFFXB8wHrg4IRSagNhzZ7iIJo3QNC91h";
 
-    private static final String CALLBACK_URL_WECHAT = "http://pay.hy960.com/alipay/wechatCallBack/";
+    private static final String CALLBACK_URL_WECHAT = "http://weixinpay.hy960.com/alipay/wechatCallBack/";
 
 
 

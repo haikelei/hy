@@ -47,7 +47,7 @@ public final class AlipayUtils {
         keyValues.put("biz_content", bizContent);
         keyValues.put("charset", "utf-8");
         keyValues.put("format", "json");
-        keyValues.put("method", "alipay.trade.app.pay");
+        keyValues.put("method", "alipay.trade.app.weixinpay");
         keyValues.put("notify_url", PayConstant.NOTIFY_URL);
         keyValues.put("sign_type", "RSA2");
         keyValues.put("timestamp", PayUtils.getDateStr(new Date(), "yyyy-MM-dd HH:mm:ss"));

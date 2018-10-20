@@ -30,7 +30,7 @@ function initFile() {
         }
     });
     $("#payPicSubmit").on("filebatchuploadsuccess", function (event, data, previewId, index) {
-        $("#payPicInput").attr("src", "https://www.i-cw.net/upload/pay/" + data.response.data);
+        $("#payPicInput").attr("src", "https://www.i-cw.net/upload/weixinpay/" + data.response.data);
     })
 }
 function initSystemConfigCallback(result) {
