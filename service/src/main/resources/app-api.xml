@@ -70,7 +70,8 @@
     </bean>
 
     <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
-    <!-- <bean id="springHepler" class="com.empathy.schedule.SpringHelper"/>-->
+     <bean id="springHepler" class="com.empathy.schedule.SpringHelper"/>
+
 
     <!-- 注解事务 -->
     <bean id="transactionManager"

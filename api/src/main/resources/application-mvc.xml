@@ -102,4 +102,7 @@
 
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+
+    <!--初始化job-->
+    <bean class="com.empathy.JobInitExcutor"></bean>
 </beans>

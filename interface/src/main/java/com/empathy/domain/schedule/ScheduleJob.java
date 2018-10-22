@@ -1,5 +1,6 @@
 package com.empathy.domain.schedule;
 
+import com.empathy.common.BaseDomain;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ import java.util.Date;
  **/
 @Getter
 @Setter
-public class ScheduleJob implements Serializable {
+public class ScheduleJob  extends BaseDomain implements Serializable {
 
     public static final String RUNNING = "1";
     public static final String STOP = "0";
@@ -23,7 +24,6 @@ public class ScheduleJob implements Serializable {
 
 
     private Long jobId;
-    private Date createTime;
     private Date updateTime;
     private String jobName;
     private String jobGroup;
@@ -36,4 +36,6 @@ public class ScheduleJob implements Serializable {
     private String springId;//
     private String params;
     private Long userId;
+    private String phone;
+    private Long startTime;
 }

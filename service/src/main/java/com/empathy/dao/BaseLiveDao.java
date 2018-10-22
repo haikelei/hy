@@ -53,6 +53,6 @@ public interface BaseLiveDao extends BaseDao<BaseLive, Long, LogBo> {
     List<BaseMember> giftListForWeek(GifiListBo bo);
 
     List<RankVo> findRank();
-    
+
     BaseLive findByUserIdAndLiveId(Long userId, Long liveId);
 }

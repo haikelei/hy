@@ -23,24 +23,30 @@ import com.empathy.domain.live.*;
 import com.empathy.domain.live.bo.*;
 import com.empathy.domain.live.vo.GiveGiftVo;
 import com.empathy.domain.live.vo.RankVo;
+import com.empathy.domain.schedule.ScheduleJob;
 import com.empathy.domain.user.BaseMember;
 import com.empathy.domain.user.HostProve;
 import com.empathy.domain.user.bo.LiveAppointmentCancelBo;
 import com.empathy.domain.user.bo.ProveAddBo;
 import com.empathy.domain.user.bo.ProveUpdBo;
+import com.empathy.schedule.SendSmsTask;
+import com.empathy.schedule.SpringHelper;
 import com.empathy.service.AbstractBaseService;
 import com.empathy.service.IAlbumService;
 import com.empathy.service.IBaseLiveSerivce;
 import com.empathy.service.IBaseMemberService;
 import com.empathy.utils.StringUtil;
 import com.empathy.utils.YXUtils;
+import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,6 +71,9 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
 
     @Autowired
     private BaseLiveTimeDao baseLiveTimeDao;
+
+    @Autowired
+    private ScheduleTaskDao scheduleTaskDao;
 
     @Autowired
     private BaseGiftDao baseGiftDao;
@@ -102,6 +111,7 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
 
     @Autowired
     private UserFocusDao userFocusDao;
+    SchedulerFactoryBean schedulerFactoryBean = SpringHelper.getBean(SchedulerFactoryBean.class);
 
     @Override
     public RspResult moneyForLive(Long liveId) {
@@ -278,6 +288,30 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
         baseLiveTime.setStartTime(System.currentTimeMillis());
         baseLiveTime.setLiveId(baseLive.getId());
         baseLiveTimeDao.save(baseLiveTime);
+
+        // TODO: 2018/10/22 lujialei 增加定时发送短信任务 baseLiveTime.getStartTime()前30分钟 对baseMember.getPhone()发送短信
+        ScheduleJob scheduleJob = new ScheduleJob();
+        scheduleJob.setStartTime(bo.getBeginTime());
+        scheduleJob.setPhone(baseMember.getPhone());
+        scheduleTaskDao.save(scheduleJob);
+
+        JobDetail realJob = JobBuilder.newJob(SendSmsTask.class)
+                // 根据name和默认的group(即"DEFAULT_GROUP")创建trigger的key
+                .withIdentity(String.valueOf(scheduleJob.getId()), "sendSms")
+                .usingJobData("phone",scheduleJob.getPhone())
+                //创建触发器
+                .build();
+        SimpleTrigger trigger = (SimpleTrigger) TriggerBuilder.newTrigger()
+                .withIdentity(String.valueOf(scheduleJob.getId()), "sendSms")
+                .startAt(new Date(Long.valueOf(scheduleJob.getStartTime()-30*60*1000))) // some Date
+                .build();
+        Scheduler sched = schedulerFactoryBean.getScheduler();
+        try {
+            sched.scheduleJob(realJob, trigger);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+
 
         return success();
     }
