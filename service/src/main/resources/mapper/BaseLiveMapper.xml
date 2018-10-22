@@ -54,6 +54,13 @@
         FROM base_live WHERE user_id = #{id} and del_flag=0
     </select>
 
+    <select id="findByUserIdAndLiveId" resultType="com.empathy.domain.live.BaseLive" parameterType="long">
+
+        SELECT
+        <include refid="fields"/>
+        FROM base_live WHERE user_id = #{param1} and del_flag=0 and id = #{param2}
+    </select>
+
 
     <select id="countById" resultType="int" parameterType="long">
         SELECT count(id) FROM base_live where id=#{id}

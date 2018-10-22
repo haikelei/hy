@@ -25,6 +25,7 @@ import com.empathy.domain.live.vo.GiveGiftVo;
 import com.empathy.domain.live.vo.RankVo;
 import com.empathy.domain.user.BaseMember;
 import com.empathy.domain.user.HostProve;
+import com.empathy.domain.user.bo.LiveAppointmentCancelBo;
 import com.empathy.domain.user.bo.ProveAddBo;
 import com.empathy.domain.user.bo.ProveUpdBo;
 import com.empathy.service.AbstractBaseService;
@@ -123,6 +124,7 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
 
         return success(money);
     }
+
 
     @Override
     public RspResult getTokenAndAccid(TokenAccidBo bo) {
@@ -279,6 +281,29 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
 
         return success();
     }
+
+    @Override
+    public RspResult cancelAppointment(LiveAppointmentCancelBo bo) {
+        BaseMember baseMember = baseMemberDao.findById(bo.getUserId());
+        if (baseMember.getProveStatus() != 1) {
+            return error(1, "您还不是主播");
+        }
+
+        BaseLive baseLive = baseLiveDao.findByUserIdAndLiveId(bo.getUserId(),bo.getLiveId());
+        if (baseLive!=null){
+            baseLive.setLiveStatus(0);
+            baseLiveDao.update(baseLive);
+        }
+        try{
+            baseLiveTimeDao.delByLiveId(bo.getLiveId());
+        }catch(Exception e){
+            e.printStackTrace();
+            return errorNo();
+        }
+
+        return success();
+    }
+
 
     @Override
     public RspResult findManageList(ManageListBo bo) {

@@ -10,4 +10,6 @@ import com.empathy.domain.user.BaseMember;
  */
 public interface BaseLiveTimeDao extends BaseDao<BaseLiveTime, Long, LogBo> {
     BaseLiveTime findByLiveIdForClose(Long liveId);
+
+    void delByLiveId(Long liveId);
 }
