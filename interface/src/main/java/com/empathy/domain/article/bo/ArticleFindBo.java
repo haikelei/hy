@@ -18,4 +18,7 @@ public class ArticleFindBo extends PageBo {
     @ApiModelProperty("用户id")
     @Required
     private Long userId;
+    @ApiModelProperty("类型,0文章，1学堂")
+    @Required
+    private Integer type;
 }

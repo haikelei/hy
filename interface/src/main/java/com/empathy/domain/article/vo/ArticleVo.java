@@ -30,4 +30,9 @@ public class ArticleVo extends Article{
 
     private Long albumId;
     private String recordingName;
+
+    private Integer type;
+
+    /** 学堂是否阅读，0未阅读，1已阅读 */
+    private Integer isRead;
 }

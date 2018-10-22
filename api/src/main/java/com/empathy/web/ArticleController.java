@@ -104,7 +104,20 @@ public class ArticleController {
 
 
         return articleService.findAllArticle(bo);
+    }
 
+    @ApiOperation(value = "app查看学堂列表", httpMethod = "POST", response = String.class)
+    @RequestMapping(value = "/findAllSchool", method = RequestMethod.POST)
+    public RspResult findAllSchool(ArticleFindBo bo) {
+        bo.setType(1);
+        return articleService.findArticleBySchoole(bo);
+    }
+
+    @ApiOperation(value = "用户读学堂内容", httpMethod = "POST", response = String.class)
+    @RequestMapping(value = "/readSchoolArticle", method = RequestMethod.POST)
+    public RspResult readSchoolArticle(Long articleId,Long userId) {
+
+        return articleService.findArticleByIdAtSchoole(articleId,userId);
     }
 
 

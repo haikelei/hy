@@ -9,12 +9,14 @@ import com.empathy.domain.article.bo.ArticleUpdBo;
 import com.empathy.domain.article.bo.PointFindBo;
 import com.empathy.domain.article.vo.ArticleVo;
 import com.empathy.domain.article.vo.PointFindVo;
+import com.empathy.domain.baseReadLog.BaseReadLog;
 import com.empathy.domain.baseRecording.BaseRecording;
 import com.empathy.domain.bidding.File;
 import com.empathy.domain.file.bo.FileCarBo;
 import com.empathy.domain.user.BaseMember;
 import com.empathy.service.AbstractBaseService;
 import com.empathy.service.IArticleService;
+import com.empathy.service.IBaseReadLogService;
 import com.empathy.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,12 @@ public class ArticleService extends AbstractBaseService implements IArticleServi
 
     @Autowired
     private CommentDao commentDao;
+
+    @Autowired
+    private BaseReadLogDao baseReadLogDao;
+
+    @Autowired
+    private IBaseReadLogService readLogService;
 
     @Override
     public RspResult addArticleByAlbum(ArticleAddBo bo) {
@@ -277,6 +285,81 @@ public class ArticleService extends AbstractBaseService implements IArticleServi
 
 
 
+    }
+
+    @Override
+    public RspResult findArticleBySchoole(ArticleFindBo bo) {
+        try {
+            int count = articleDao.count(bo);
+            List<ArticleVo> list = articleDao.listFor(bo);
+            a: for (ArticleVo articleVo : list) {
+                BaseReadLog baseReadLog = baseReadLogDao.findByUserAndArticle(articleVo.getId(),bo.getUserId());
+                if(baseReadLog != null){
+                    articleVo.setIsRead(1);
+                }else {
+                    articleVo.setIsRead(0);
+                }
+                int commentCount = commentDao.findCountByDynamic(articleVo.getId());
+                articleVo.setCommentCount(commentCount);
+                FileCarBo fileCarBo = new FileCarBo();
+                fileCarBo.setType("article");
+                fileCarBo.setPurposeId(articleVo.getId());
+                List<String> fileByPurposeIdAndTypeList = fileDao.findFileByPurposeIdAndTypeList1(fileCarBo);
+                articleVo.setArticleUrl(fileByPurposeIdAndTypeList);
+                int countPoint = articleDao.findCount(articleVo.getId(),bo.getUserId());
+                if(countPoint>0){
+                    articleVo.setPointStatus(1);
+                }else {
+                    articleVo.setPointStatus(0);
+                }
+                Long createTime = articleVo.getCreateTime();
+                double time = (System.currentTimeMillis() - createTime) / 1000 / 60 / 60;
+                articleVo.setTime(time);
+                if(StringUtil.isNotLongEmpty(articleVo.getRecordId())){
+                    BaseRecording byId = baseRecordingDao.findById(articleVo.getRecordId());
+                    articleVo.setAlbumId(byId.getAlbumId());
+                    articleVo.setStatus(3);
+                    articleVo.setRecordingName(byId.getTitle());
+                    continue a;
+                }else if (articleVo.getArticleUrl()!=null&&articleVo.getArticleUrl().size()>0&&articleVo.getUserId()!=1){
+                    articleVo.setStatus(2);
+                    continue a;
+                }else {
+                    articleVo.setStatus(1);
+                    continue a;
+                }
+            }
+            return success(count,list);
+        }catch (Exception e){
+            e.printStackTrace();
+            return errorNo();
+        }
+    }
+
+    @Override
+    public RspResult findArticleByIdAtSchoole(Long articleId,Long userId) {
+        readLogService.addReadLog(articleId,userId);
+        ArticleVo articleVo = articleDao.findDetail(articleId);
+        int commentCount = commentDao.findCountByDynamic(articleVo.getId());
+        articleVo.setCommentCount(commentCount);
+        FileCarBo fileCarBo = new FileCarBo();
+        fileCarBo.setType("article");
+        fileCarBo.setPurposeId(articleVo.getId());
+        List<String> fileByPurposeIdAndTypeList = fileDao.findFileByPurposeIdAndTypeList1(fileCarBo);
+        articleVo.setArticleUrl(fileByPurposeIdAndTypeList);
+        Long createTime = articleVo.getCreateTime();
+        double time = (System.currentTimeMillis() - createTime) / 1000 / 60 / 60;
+        articleVo.setTime(time);
+        if (StringUtil.isNotLongEmpty(articleVo.getRecordId())) {
+            articleVo.setStatus(3);
+            return success(articleVo);
+        } else if (articleVo.getArticleUrl().size() > 0 && StringUtil.isNotEmpty(articleVo.getArticleUrl().get(0))) {
+            articleVo.setStatus(2);
+            return success(articleVo);
+        } else {
+            articleVo.setStatus(1);
+            return success(articleVo);
+        }
     }
 
 

@@ -33,4 +33,9 @@ public interface IArticleService extends BaseService<Article, Long, PageBo> {
     RspResult findPoint(PointFindBo bo);
 
     RspResult addArticleByAlbum(ArticleAddBo bo);
+
+
+    RspResult findArticleBySchoole(ArticleFindBo bo);
+
+    RspResult findArticleByIdAtSchoole(Long articleId,Long userId);
 }
