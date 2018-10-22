@@ -30,7 +30,8 @@ public class SmsNewUtils {
     private static final String UPD_DEAL_PASSWORD_PREFIX = "sms_upd_password";
     private static final String BE_PROVE_PREFIX = "sms_prove";
 
-    private static final String SMS_TEMPLATE = "【华语】您的验证码是%s，在5分钟内有效。如非本人操作请忽略本短信。";
+    private static final String SMS_VERIFY_TEMPLATE = "【华语】您的验证码是%s，在5分钟内有效。如非本人操作请忽略本短信。";
+    private static final String SMS_APPOINTMENT_TEMPLATE = "【华语】您预约的直播还有半小时开始，请及时做好准备。";
 
     /**
      * 忘记密码发送短信验证码
@@ -69,6 +70,15 @@ public class SmsNewUtils {
     }
 
     /**
+     * 直播预约短信发送
+     * @param phone
+     * @return
+     */
+    public static boolean beginAppointment(String phone) {
+        return sendYzm(phone, SMS_APPOINTMENT_TEMPLATE);
+    }
+
+    /**
      * 通用短信模板Send
      * @param prefix
      * @param phone
@@ -76,7 +86,7 @@ public class SmsNewUtils {
      */
     public static boolean sendTemplate(String prefix, String phone) {
         String code = String.valueOf(random.nextLong(100000,999999));
-        String content = String.format(SMS_TEMPLATE, code);
+        String content = String.format(SMS_VERIFY_TEMPLATE, code);
         boolean result = sendYzm(phone, content);
         CacheUtils.put(prefix + phone, code, 300000);
         return result;
