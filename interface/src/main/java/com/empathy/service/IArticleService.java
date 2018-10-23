@@ -28,7 +28,7 @@ public interface IArticleService extends BaseService<Article, Long, PageBo> {
 
     RspResult addPoint(Long id,Long userId);
 
-    RspResult canclPoint(Long id,Long userId);
+    RspResult cancelPoint(Long id,Long userId);
 
     RspResult findPoint(PointFindBo bo);
 

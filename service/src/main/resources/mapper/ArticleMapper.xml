@@ -58,6 +58,9 @@
 
             </if>
 
+            <if test="type != null">
+                a.type = #{type} and
+            </if>
             a.del_flag=0
 
 
@@ -69,7 +72,7 @@
 
     <select id="list" parameterType="com.empathy.domain.article.bo.ArticleFindBo" resultType="com.empathy.domain.article.vo.ArticleVo">
         select a.id,a.user_id userId,a.content,a.first_content firstContent,a.red_point redPoint,a.title,a.code,
-        b.username,d.url articleUrl,a.record_id recordId
+        b.username,d.url articleUrl,a.record_id recordId,a.type
 
         from base_article a left join base_member b on a.user_id = b.id
 
@@ -83,18 +86,23 @@
 
             </if>
 
+            <if test="type != null">
+                a.type = #{type} and
+            </if>
             a.del_flag=0
 
 
         </where>
-          order by a.create_time desc,a.code
+
+        GROUP BY a.id
+        order by a.create_time desc,a.code
         LIMIT #{start},#{limit}
     </select>
 
 
     <select id="listFor" parameterType="com.empathy.domain.article.bo.ArticleFindBo" resultType="com.empathy.domain.article.vo.ArticleVo">
         select a.id,a.user_id userId,a.first_content firstContent,a.red_point redPoint,a.title,a.code,
-        b.username,c.url,a.create_time createTime,a.content,a.record_id recordId
+        b.username,c.url,a.create_time createTime,a.content,a.record_id recordId,a.type
 
         from base_article a left join base_member b on a.user_id = b.id
 
@@ -108,6 +116,7 @@
 
             </if>
 
+            a.type = #{type} and
             a.del_flag=0
 
 
@@ -119,7 +128,7 @@
 
     <select id="findDetail" parameterType="long" resultType="com.empathy.domain.article.vo.ArticleVo">
    select a.id,a.user_id userId,a.first_content firstContent,a.red_point redPoint,a.title,a.code,
-        b.username,c.url,a.content,a.create_time,a.content content
+        b.username,c.url,a.content,a.create_time createTime,a.content content
         from base_article a
         left join base_member b on a.user_id = b.id
         left join base_file c on a.id = c.purpose_id  and c.type="image" and c.purpose="user"

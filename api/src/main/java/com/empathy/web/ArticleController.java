@@ -62,7 +62,7 @@ public class ArticleController {
     public RspResult cancelPoint(Long id,Long userId) {
 
 
-        return articleService.canclPoint(id,userId);
+        return articleService.cancelPoint(id,userId);
     }
 
     @ApiOperation(value = "查看点赞列表", httpMethod = "POST", response = String.class)
@@ -77,7 +77,7 @@ public class ArticleController {
     @RequestMapping(value = "/findArticle", method = RequestMethod.POST)
     public RspResult findArticle(ArticleFindBo bo) {
 
-
+        bo.setType(0);
         return articleService.findArticle(bo);
 
     }

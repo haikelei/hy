@@ -89,7 +89,7 @@ public class ArticleService extends AbstractBaseService implements IArticleServi
     }
 
     @Override
-    public RspResult canclPoint(Long id,Long userId) {
+    public RspResult cancelPoint(Long id,Long userId) {
         try {
 
             articleDao.decPoint(id);
