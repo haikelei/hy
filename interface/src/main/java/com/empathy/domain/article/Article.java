@@ -23,4 +23,6 @@ public class Article extends BaseDomain {
 
     private Integer code;
     private Long recordId;
+
+    private Integer type;
 }

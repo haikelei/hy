@@ -32,4 +32,7 @@ public class ArticleAddBo {
     @ApiModelProperty("录音id选填")
     @Required
     private Long recordId;
+    @ApiModelProperty("文章类型")
+    @Required
+    private Integer type;
 }
