@@ -111,7 +111,6 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
 
     @Autowired
     private UserFocusDao userFocusDao;
-    SchedulerFactoryBean schedulerFactoryBean = SpringHelper.getBean(SchedulerFactoryBean.class);
 
     @Override
     public RspResult moneyForLive(Long liveId) {
@@ -305,6 +304,7 @@ public class BaseLiveService extends AbstractBaseService implements IBaseLiveSer
                 .withIdentity(String.valueOf(scheduleJob.getId()), "sendSms")
                 .startAt(new Date(Long.valueOf(scheduleJob.getStartTime()-30*60*1000))) // some Date
                 .build();
+        SchedulerFactoryBean schedulerFactoryBean = SpringHelper.getBean(SchedulerFactoryBean.class);
         Scheduler sched = schedulerFactoryBean.getScheduler();
         try {
             sched.scheduleJob(realJob, trigger);
