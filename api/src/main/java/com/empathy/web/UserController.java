@@ -97,8 +97,6 @@ public class UserController {
     @ApiOperation(value = "忘记密码", httpMethod = "POST", response = String.class)
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.POST)
     public RspResult forgetPassword(ForgetPasswordBo bo) {
-
-
         return userinfoService.forgetPassword(bo);
 
     }

@@ -3,6 +3,8 @@ package com.empathy.web;
 import com.empathy.service.impl.AppCustomerService;
 import com.empathy.service.impl.PayRecordService;
 import com.empathy.weixinpay.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,6 +25,7 @@ import java.util.Map;
 
 @Controller
 @Scope("prototype")
+@Api(tags = {"微信支付接口"})
 public class TenPayController {
 
     @Autowired
@@ -39,13 +42,15 @@ public class TenPayController {
      * @return
      * @throws Exception
      */
+    @ApiOperation(value = "生成微信订单", httpMethod = "POST", response = String.class)
     @RequestMapping(value = "/app/tenpay/prepay", method = RequestMethod.POST)
     public @ResponseBody Map<String, Object> getOrder(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
         // 获取生成预支付订单的请求类
         PrepayIdRequestHandler prepayReqHandler = new PrepayIdRequestHandler(request, response);
-        String totalFee = request.getParameter("total_fee");
+//        String totalFee = request.getParameter("total_fee");
+        String totalFee = "1";
         int total_fee=(int) (Float.valueOf(totalFee)*100);
         System.out.println("total:"+total_fee);
         System.out.println("total_fee:" + total_fee);

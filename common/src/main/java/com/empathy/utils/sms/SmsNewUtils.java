@@ -29,6 +29,7 @@ public class SmsNewUtils {
     private static final String CHANGE_DEAL_PASSWORD_PREFIX = "sms_change_password";
     private static final String UPD_DEAL_PASSWORD_PREFIX = "sms_upd_password";
     private static final String BE_PROVE_PREFIX = "sms_prove";
+    public static final String CHANGE_WITHDRAW_PWS = "sms_change_withdraw_";
 
     private static final String SMS_VERIFY_TEMPLATE = "【华语】您的验证码是%s，在5分钟内有效。如非本人操作请忽略本短信。";
     private static final String SMS_APPOINTMENT_TEMPLATE = "【华语】您预约的直播还有半小时开始，请及时做好准备。";
@@ -76,6 +77,24 @@ public class SmsNewUtils {
      */
     public static boolean beginAppointment(String phone) {
         return sendYzm(phone, SMS_APPOINTMENT_TEMPLATE);
+    }
+
+    /**
+     * 修改交易密码
+     * @param phone
+     * @return
+     */
+    public static boolean changePayPassword(String phone) {
+        return sendTemplate(CHANGE_WITHDRAW_PWS,phone);
+    }
+
+    //验证验证码
+    public static Boolean checkCode(String tag,String code, String phone) {
+        Object o = CacheUtils.get(tag + phone);
+        if (!code.equals(o + "")) {
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -5,7 +5,7 @@ public class ConstantUtil {
     /**
      * 微信开发平台应用ID
      */
-    public static final String APP_ID="";
+    public static final String APP_ID="wxad49888a3aa32ae8";
     /**
      * 应用对应的凭证
      */
@@ -13,15 +13,15 @@ public class ConstantUtil {
     /**
      * 应用对应的密钥
      */
-    public static final String APP_KEY="";
+    public static final String APP_KEY="gW7Zr2ry0mei7h1qCo35ormt4ZZC0ki8";
     /**
      * 微信支付商户号
      */
-    public static final String MCH_ID="";
+    public static final String MCH_ID="1517033091";
     /**
      * 商品描述
      */
-    public static final String BODY="QQ游戏-账户充值";
+    public static final String BODY="华语-订单支付";
     /**
      * 商户号对应的密钥
      */
@@ -30,7 +30,7 @@ public class ConstantUtil {
     /**
      * 商户id
      */
-    public static final String PARTNER_ID="";
+    public static final String PARTNER_ID="1517033091";
     /**
      * 常量固定值
      */
@@ -42,5 +42,5 @@ public class ConstantUtil {
     /**
      * 微信服务器回调通知url
      */
-    public static String NOTIFY_URL="http://www.bairuoheng.cn/app/tenpay/notify";
+    public static String NOTIFY_URL="http://47.106.196.89:8080/app/tenpay/notify";
 }

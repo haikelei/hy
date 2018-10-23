@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PayRecordService {
-    public void insert(com.empathy.weixinpay.PayRecord payRecord) {
+    public void insert(PayRecord payRecord) {
 
     }
 
