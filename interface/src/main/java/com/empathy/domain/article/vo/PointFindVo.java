@@ -14,6 +14,8 @@ public class PointFindVo {
 
     private String pointUsername;
 
+    private String url;
+
     private Integer level;
 
     private Long createTime;

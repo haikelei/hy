@@ -107,6 +107,16 @@ public class ArticleService extends AbstractBaseService implements IArticleServi
             List<PointFindVo> list = articleDao.findPoint(bo);
             Integer count = articleDao.countPoint(bo);
 
+            for (PointFindVo vo : list) {
+                FileCarBo fileCarBo = new FileCarBo();
+                fileCarBo.setType("user");
+                fileCarBo.setPurposeId(vo.getUserId());
+                File file = fileDao.findFileByPurposeIdAndType(fileCarBo);
+                if(file!=null){
+                    vo.setUrl(file.getLocation());
+                }
+            }
+
             return success(count != null ? count : 0,list);
         }catch (Exception e){
             e.printStackTrace();
