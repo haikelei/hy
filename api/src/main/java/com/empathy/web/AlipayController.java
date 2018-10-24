@@ -1,7 +1,6 @@
 package com.empathy.web;
 
 import com.empathy.dao.BaseDealDao;
-
 import com.empathy.domain.deal.BaseDeal;
 import com.empathy.service.IBaseMemberService;
 import com.empathy.service.IUserMemberService;
@@ -19,11 +18,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import static com.empathy.service.impl.UserinfoService.API_SECRET;
 
@@ -125,7 +122,11 @@ public class AlipayController {
     public void wechatCallBack(HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml");
-        System.out.print("wechat进来了");
+
+        System.out.println();
+        System.out.print("*********wechat 回调进来了**************");
+        System.out.println();
+
         try {
             ServletInputStream in = request.getInputStream();
             String resxml = convertStreamToString(in);

@@ -249,14 +249,12 @@ public class UserinfoService extends AbstractBaseService implements IUserinfoSer
             resultMap.put("partnerId", MCH_ID);
             resultMap.put("prepayId", prepayId);
             resultMap.put("sign", finalsign);
+
             System.out.println("结果码:"+resultMap);
-            return success(resultMap);
+            String al = AlipayUtils.buildOrderParam(resultMap);
 
-
-
+            return success(al);
         }
-
-
 
         return null;
     }

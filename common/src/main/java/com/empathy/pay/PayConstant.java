@@ -65,6 +65,6 @@ public interface PayConstant {
     //    String WX_NOTIFY_URL = "http://118.31.2.16/xmxb/user/order/weixin/notify";
     String WX_MCH_ID = "1462321802";//商户号
     String WX_TRADE_TYPE = "APP";
-    String WX_UNIFIED_ORDER_URL = "https://api.mch.weixin.qq.com/weixinpay/unifiedorder";
-    String WX_REFUND_URL = "https://api.mch.weixin.qq.com/secapi/weixinpay/refund";
+    String WX_UNIFIED_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+    String WX_REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
 }

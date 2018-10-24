@@ -47,7 +47,7 @@ public final class AlipayUtils {
         keyValues.put("biz_content", bizContent);
         keyValues.put("charset", "utf-8");
         keyValues.put("format", "json");
-        keyValues.put("method", "alipay.trade.app.weixinpay");
+        keyValues.put("method", "alipay.trade.app.pay");
         keyValues.put("notify_url", PayConstant.NOTIFY_URL);
         keyValues.put("sign_type", "RSA2");
         keyValues.put("timestamp", PayUtils.getDateStr(new Date(), "yyyy-MM-dd HH:mm:ss"));
@@ -73,7 +73,7 @@ public final class AlipayUtils {
         return content;
     }
 
-    private static String buildOrderParam(final Map<String, String> map) {
+    public static String buildOrderParam(final Map<String, String> map) {
         List<String> keys = new ArrayList<>(map.keySet());
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < keys.size() - 1; i++) {
