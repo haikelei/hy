@@ -10,7 +10,7 @@ public class PointFindVo {
 
     private Long userId;
 
-    private Long articleId;
+//    private Long articleId;
 
     private String pointUsername;
 

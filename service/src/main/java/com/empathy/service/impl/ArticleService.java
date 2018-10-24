@@ -197,6 +197,26 @@ public class ArticleService extends AbstractBaseService implements IArticleServi
              Long createTime = articleVo.getCreateTime();
              double time = (System.currentTimeMillis() - createTime) / 1000 / 60 / 60;
             articleVo.setTime(time);
+
+
+             PointFindBo pointFindBo = new PointFindBo();
+             pointFindBo.setId(articleVo.getId());
+             pointFindBo.setStart(0);
+             pointFindBo.setLimit(10);
+             List<PointFindVo> pointFindVoList = articleDao.findPoint(pointFindBo);
+//             Integer count = articleDao.countPoint(bo);
+
+             for (PointFindVo vo : pointFindVoList) {
+                 FileCarBo fileCar = new FileCarBo();
+                 fileCar.setType("user");
+                 fileCar.setPurposeId(vo.getUserId());
+                 File file = fileDao.findFileByPurposeIdAndType(fileCar);
+                 if(file!=null){
+                     vo.setUrl(file.getLocation());
+                 }
+             }
+             articleVo.setPoints(pointFindVoList);
+
              if(StringUtil.isNotLongEmpty(articleVo.getRecordId())){
                  BaseRecording byId = baseRecordingDao.findById(articleVo.getRecordId());
                  articleVo.setAlbumId(byId.getAlbumId());
@@ -210,6 +230,8 @@ public class ArticleService extends AbstractBaseService implements IArticleServi
                   articleVo.setStatus(1);
                   continue a;
               }
+
+
             }
             return success(count,list);
         }catch (Exception e){

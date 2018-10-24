@@ -1,7 +1,6 @@
 package com.empathy.service.impl;
 
 import com.alibaba.druid.util.StringUtils;
-import com.empathy.common.PropertiesConifig;
 import com.empathy.common.RspResult;
 import com.empathy.dao.FileDao;
 import com.empathy.domain.bidding.bo.TokenBo;
@@ -11,9 +10,6 @@ import com.empathy.domain.file.bo.FileCarBo;
 import com.empathy.service.AbstractBaseService;
 import com.empathy.service.IFileService;
 import com.empathy.utils.FileUploadUtils;
-import com.sun.tools.javac.util.Log;
-import lombok.extern.log4j.Log4j;
-import org.apache.http.HttpRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+
+//import com.sun.tools.javac.util.Log;
 
 /**
  * Created by MI on 2017/12/21.
