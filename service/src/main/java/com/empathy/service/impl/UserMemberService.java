@@ -6,14 +6,12 @@ import com.empathy.dao.BaseDealDao;
 import com.empathy.dao.BaseMemberDao;
 import com.empathy.dao.UserMemberDao;
 import com.empathy.domain.deal.BaseDeal;
-import com.empathy.domain.member.Member;
 import com.empathy.domain.user.BaseMember;
 import com.empathy.domain.user.UserMember;
 import com.empathy.domain.user.bo.MemberAddBo;
 import com.empathy.pay.alipay.AlipayUtils;
 import com.empathy.pay.alipay.RefundContent;
 import com.empathy.service.AbstractBaseService;
-import com.empathy.service.IBaseMemberService;
 import com.empathy.service.IUserMemberService;
 import com.empathy.utils.CodeUtils;
 import com.empathy.utils.XmlUtil;
@@ -52,15 +50,25 @@ public class UserMemberService extends AbstractBaseService implements IUserMembe
 
     //----------------------------微信账号--------------------------------
 
-    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/weixinpay/unifiedorder"; // 统一下单
+//    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/weixinpay/unifiedorder"; // 统一下单
+//
+//    private static final String WECHAT_APP_ID ="wxc27fe76af5a55120";
+//
+//    private static final String MCH_ID = "1496007892";
+//    //商户平台密钥
+//    public static final String API_SECRET = "WFFXB8wHrg4IRSagNhzZ7iIJo3QNC91h";
+//
+//    private static final String CALLBACK_URL_WECHAT = "http://weixinpay.hy960.com/alipay/wechatCallBack/";
 
-    private static final String WECHAT_APP_ID ="wxc27fe76af5a55120";
+    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/pay/unifiedorder"; // 统一下单
 
-    private static final String MCH_ID = "1496007892";
+    private static final String WECHAT_APP_ID ="wxad49888a3aa32ae8";
+
+    private static final String MCH_ID = "1517033091";
     //商户平台密钥
-    public static final String API_SECRET = "WFFXB8wHrg4IRSagNhzZ7iIJo3QNC91h";
+    public static final String API_SECRET = "gW7Zr2ry0mei7h1qCo35ormt4ZZC0ki8";
 
-    private static final String CALLBACK_URL_WECHAT = "http://weixinpay.hy960.com/alipay/wechatCallBack/";
+    private static final String CALLBACK_URL_WECHAT = "http://47.106.196.89:8080/hy/alipay/wechatCallBack/";
 
 
 
@@ -104,7 +112,7 @@ public class UserMemberService extends AbstractBaseService implements IUserMembe
             //parm.put("device_info", "WEB");
             String nonceStr = WXPayUtil.generateNonceStr();
             parm.put("nonce_str", nonceStr);
-            parm.put("body", "gugu");
+            parm.put("body", "hy");
             //parm.put("attach", "Crocutax");   //附加数据
             parm.put("out_trade_no",baseDeal.getId()+"");
             parm.put("total_fee", total_fee);
@@ -135,7 +143,7 @@ public class UserMemberService extends AbstractBaseService implements IUserMembe
                     "<sign>" + sign + "</sign>" +
                     "</xml>";
 
-            System.out.println("xmlFormat:" + xml);
+            System.out.println("xmlFormat***:" + xml);
 
             String prepayId = getPrepayId(ORDER_PAY, xml);
             if (StringUtils.isEmpty(prepayId)) {

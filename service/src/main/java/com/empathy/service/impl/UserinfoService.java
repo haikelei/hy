@@ -68,15 +68,26 @@ public class UserinfoService extends AbstractBaseService implements IUserinfoSer
 
     //----------------------------微信账号--------------------------------
 
-    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/weixinpay/unifiedorder"; // 统一下单
+//    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/weixinpay/unifiedorder"; // 统一下单
+//
+//    private static final String WECHAT_APP_ID ="wxc27fe76af5a55120";
+//
+//    private static final String MCH_ID = "1496007892";
+//    //商户平台密钥
+//    public static final String API_SECRET = "WFFXB8wHrg4IRSagNhzZ7iIJo3QNC91h";
+//
+//    private static final String CALLBACK_URL_WECHAT = "http://weixinpay.hy960.com/alipay/wechatCallBack/";
 
-    private static final String WECHAT_APP_ID ="wxc27fe76af5a55120";
 
-    private static final String MCH_ID = "1496007892";
+    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/pay/unifiedorder"; // 统一下单
+
+    private static final String WECHAT_APP_ID ="wxad49888a3aa32ae8";
+
+    private static final String MCH_ID = "1517033091";
     //商户平台密钥
-    public static final String API_SECRET = "WFFXB8wHrg4IRSagNhzZ7iIJo3QNC91h";
+    public static final String API_SECRET = "gW7Zr2ry0mei7h1qCo35ormt4ZZC0ki8";
 
-    private static final String CALLBACK_URL_WECHAT = "http://weixinpay.hy960.com/alipay/wechatCallBack/";
+    private static final String CALLBACK_URL_WECHAT = "http://47.106.196.89:8080/hy/alipay/wechatCallBack/";
 
 
     @Override
@@ -177,7 +188,7 @@ public class UserinfoService extends AbstractBaseService implements IUserinfoSer
             //parm.put("device_info", "WEB");
             String nonceStr = WXPayUtil.generateNonceStr();
             parm.put("nonce_str", nonceStr);
-            parm.put("body", "gugu");
+            parm.put("body", "hy");
             //parm.put("attach", "Crocutax");   //附加数据
             parm.put("out_trade_no",baseDeal.getId()+"");
             parm.put("total_fee", total_fee);
